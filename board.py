@@ -1,15 +1,23 @@
 import pygame
-import os
-import main
 from piece import *
 from constants import *
 
+whitePieces = []
+blackPieces = []
+
+whiteSpaces = []
+blackSpaces = []
+
+flag = 0
 def draw_board():
     currX = 0
     currY = 0
     flag = 0
     wSpaces = []
     bSpaces = []
+    global whiteSpaces
+    global blackSpaces
+
     while currX <= 800:
         while currY <= 800:
             if flag == 0: #0 = white spaces
@@ -23,22 +31,28 @@ def draw_board():
             currY += 100
         currX += 100
         currY = 0
+    whiteSpaces = wSpaces
+    blackSpaces = bSpaces
     return (wSpaces, bSpaces)
 
-def initBoard():
+def init_board():
     numPawns = 0
     bPieces = []
     wPieces = []
-
+    global whitePieces
+    global blackPieces
     #Black Pawn Locations
+    currSpaceX = 0
+    currSpaceY = 100
     currX = 25
     currY = 125
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
-        newPiece = Piece(B_PAWN, pawn)
+        newPiece = Piece(B_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100)
         bPieces.append(newPiece)
         numPawns += 1
         currX += 100
+        currSpaceX += 100
 
     #Rest of black pieces
     leftRook = pygame.Rect(B_LEFT_ROOK_X, B_LEFT_ROOK_Y, PIECE_WIDTH, PIECE_HEIGHT)
@@ -50,26 +64,34 @@ def initBoard():
     rightKnight = pygame.Rect(B_RIGHT_KNIGHT_X, B_RIGHT_KNIGHT_Y, PIECE_WIDTH, PIECE_HEIGHT)
     rightBishop = pygame.Rect(B_RIGHT_BISHOP_X, B_RIGHT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
     
-    bPieces.append(Piece(B_ROOK, leftRook))
-    bPieces.append(Piece(B_KNIGHT, leftKnight))
-    bPieces.append(Piece(B_BISHOP, leftBishop))
-    bPieces.append(Piece(B_QUEEN, queen))
-    bPieces.append(Piece(B_KING, king))
-    bPieces.append(Piece(B_ROOK, rightRook))
-    bPieces.append(Piece(B_KNIGHT, rightKnight))
-    bPieces.append(Piece(B_BISHOP, rightBishop))
+    currSpaceX = 0
+    currSpaceY = 0
+
+    bPieces.append(Piece(B_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece(B_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece(B_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece(B_QUEEN, queen, currSpaceX + 300, currSpaceX + 400, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece(B_KING, king, currSpaceX + 400, currSpaceX + 500, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece(B_ROOK, rightRook, currSpaceX + 500, currSpaceX + 600, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece(B_KNIGHT, rightKnight, currSpaceX + 600, currSpaceX + 700, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece(B_BISHOP, rightBishop, currSpaceX + 700, currSpaceX + 800, currSpaceY, currSpaceY + 100))
+
+    
+    numPawns = 0
 
     #White Pawn Locations
-    numPawns = 0
+    currSpaceX = 0
+    currSpaceY = 600
     currX = 25
     currY = 625
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
-        newPiece = Piece(W_PAWN, pawn)
+        newPiece = Piece(W_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100)
         wPieces.append(newPiece)
         numPawns += 1
         currX += 100
-    
+        currSpaceX += 100
+
     leftRook = pygame.Rect(W_LEFT_ROOK_X, W_LEFT_ROOK_Y, PIECE_WIDTH, PIECE_HEIGHT)
     leftKnight = pygame.Rect(W_LEFT_KNIGHT_X, W_LEFT_KNIGHT_Y, PIECE_WIDTH, PIECE_HEIGHT)
     leftBishop = pygame.Rect(W_LEFT_BISHOP_X, W_LEFT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
@@ -79,16 +101,44 @@ def initBoard():
     rightKnight = pygame.Rect(W_RIGHT_KNIGHT_X, W_RIGHT_KNIGHT_Y, PIECE_WIDTH, PIECE_HEIGHT)
     rightBishop = pygame.Rect(W_RIGHT_BISHOP_X, W_RIGHT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
     
-    wPieces.append(Piece(W_ROOK, leftRook))
-    wPieces.append(Piece(W_KNIGHT, leftKnight))
-    wPieces.append(Piece(W_BISHOP, leftBishop))
-    wPieces.append(Piece(W_QUEEN, queen))
-    wPieces.append(Piece(W_KING, king))
-    wPieces.append(Piece(W_ROOK, rightRook))
-    wPieces.append(Piece(W_KNIGHT, rightKnight))
-    wPieces.append(Piece(W_BISHOP, rightBishop))
+    currSpaceX = 0
+    currSpaceY = 700
+    wPieces.append(Piece(W_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece(W_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece(W_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece(W_QUEEN, queen, currSpaceX + 300, currSpaceX + 400, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece(W_KING, king, currSpaceX + 400, currSpaceX + 500, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece(W_ROOK, rightRook, currSpaceX + 500, currSpaceX + 600, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece(W_KNIGHT, rightKnight, currSpaceX + 600, currSpaceX + 700, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece(W_BISHOP, rightBishop, currSpaceX + 700, currSpaceX + 800, currSpaceY, currSpaceY + 100))
+
+   
+    whitePieces = wPieces
+    blackPieces = bPieces
 
     return (wPieces, bPieces)
     
+def get_pieces():
+    wPieces, bPieces = whitePieces, blackPieces
+    return (wPieces, bPieces)
 
+#checks to see if a piece exist where the player clicked on. If so, change piece pos or do nothing
+def check_space(mousePos): 
+    global blackPieces
+    global whitePieces
+    selectedPiece = None
+    for piece in blackPieces:
+        if mousePos[0] > piece.spaceXLeftBound and mousePos[0] < piece.spaceXRightBound and mousePos[1] > piece.spaceYUpperBound and mousePos[1] < piece.spaceYLowerBound:
+            selectedPiece = piece
+            break
+    for piece in whitePieces:
+        if mousePos[0] > piece.spaceXLeftBound and mousePos[0] < piece.spaceXRightBound and mousePos[1] > piece.spaceYUpperBound and mousePos[1] < piece.spaceYLowerBound:
+            selectedPiece = piece
+            break
+    return selectedPiece
 
+def move_piece(mousePos, piece):
+    global blackSpaces
+    global whiteSpaces
+    print ("moving space")
+    piece.move(mousePos, whiteSpaces, blackSpaces)
