@@ -26,7 +26,6 @@ def draw_window(flag):
         WIN.blit(piece.image, (piece.rect.x, piece.rect.y))
     for piece in wPieces:
         WIN.blit(piece.image, (piece.rect.x, piece.rect.y))
-    
     pygame.display.update()
 
 

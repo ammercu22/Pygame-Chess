@@ -48,7 +48,7 @@ def init_board():
     currY = 125
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
-        newPiece = Piece(B_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100)
+        newPiece = Piece("Pawn", "b", B_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100)
         bPieces.append(newPiece)
         numPawns += 1
         currX += 100
@@ -67,14 +67,14 @@ def init_board():
     currSpaceX = 0
     currSpaceY = 0
 
-    bPieces.append(Piece(B_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100))
-    bPieces.append(Piece(B_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100))
-    bPieces.append(Piece(B_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100))
-    bPieces.append(Piece(B_QUEEN, queen, currSpaceX + 300, currSpaceX + 400, currSpaceY, currSpaceY + 100))
-    bPieces.append(Piece(B_KING, king, currSpaceX + 400, currSpaceX + 500, currSpaceY, currSpaceY + 100))
-    bPieces.append(Piece(B_ROOK, rightRook, currSpaceX + 500, currSpaceX + 600, currSpaceY, currSpaceY + 100))
-    bPieces.append(Piece(B_KNIGHT, rightKnight, currSpaceX + 600, currSpaceX + 700, currSpaceY, currSpaceY + 100))
-    bPieces.append(Piece(B_BISHOP, rightBishop, currSpaceX + 700, currSpaceX + 800, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("Rook","b", B_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("Knight","b", B_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("Bishop","b", B_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("Queen","b", B_QUEEN, queen, currSpaceX + 300, currSpaceX + 400, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("King","b", B_KING, king, currSpaceX + 400, currSpaceX + 500, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("Bishop","b", B_BISHOP, rightBishop, currSpaceX + 500, currSpaceX + 600, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("Knight","b", B_KNIGHT, rightKnight, currSpaceX + 600, currSpaceX + 700, currSpaceY, currSpaceY + 100))
+    bPieces.append(Piece("Rook","b", B_ROOK, rightRook, currSpaceX + 700, currSpaceX + 800, currSpaceY, currSpaceY + 100))
 
     
     numPawns = 0
@@ -86,7 +86,7 @@ def init_board():
     currY = 625
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
-        newPiece = Piece(W_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100)
+        newPiece = Piece("Pawn", "w", W_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100)
         wPieces.append(newPiece)
         numPawns += 1
         currX += 100
@@ -103,14 +103,15 @@ def init_board():
     
     currSpaceX = 0
     currSpaceY = 700
-    wPieces.append(Piece(W_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100))
-    wPieces.append(Piece(W_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100))
-    wPieces.append(Piece(W_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100))
-    wPieces.append(Piece(W_QUEEN, queen, currSpaceX + 300, currSpaceX + 400, currSpaceY, currSpaceY + 100))
-    wPieces.append(Piece(W_KING, king, currSpaceX + 400, currSpaceX + 500, currSpaceY, currSpaceY + 100))
-    wPieces.append(Piece(W_ROOK, rightRook, currSpaceX + 500, currSpaceX + 600, currSpaceY, currSpaceY + 100))
-    wPieces.append(Piece(W_KNIGHT, rightKnight, currSpaceX + 600, currSpaceX + 700, currSpaceY, currSpaceY + 100))
-    wPieces.append(Piece(W_BISHOP, rightBishop, currSpaceX + 700, currSpaceX + 800, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("Rook", "w", W_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("Knight","w", W_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("Bishop","w", W_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("Queen","w", W_QUEEN, queen, currSpaceX + 300, currSpaceX + 400, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("King","w", W_KING, king, currSpaceX + 400, currSpaceX + 500, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("Bishop","w", W_BISHOP, rightBishop, currSpaceX + 500, currSpaceX + 600, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("Knight","w", W_KNIGHT, rightKnight, currSpaceX + 600, currSpaceX + 700, currSpaceY, currSpaceY + 100))
+    wPieces.append(Piece("Rook","w", W_ROOK, rightRook, currSpaceX + 700, currSpaceX + 800, currSpaceY, currSpaceY + 100))
+
 
    
     whitePieces = wPieces
