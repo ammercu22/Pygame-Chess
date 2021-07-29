@@ -1,25 +1,18 @@
 class Player:
-    def __init__(self, piecesColor, score, time):
+    def __init__(self, piecesColor, time):
         self.pieces = []
         self.opponentPieces = []
         self.piecesColor = piecesColor
-        self.score = score
-        self.time = time
+        self.score = 0
 
     def set_pieces(self, updatedPieces):
         self.pieces = updatedPieces
-    
-    def set_time(self, updatedTime):
-        self.time = updatedTime
 
     def set_score(self, updatedScore):
         self.score = updatedScore
 
     def get_pieces(self):
         return self.pieces
-    
-    def get_time(self):
-        return self.time
     
     def get_score(self):
         return self.score

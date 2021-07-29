@@ -11,7 +11,7 @@ blackSpaces = []
 flag = 0
 def draw_board():
     currX = 0
-    currY = 0
+    currY = 100
     flag = 0
     wSpaces = []
     bSpaces = []
@@ -19,7 +19,7 @@ def draw_board():
     global blackSpaces
 
     while currX <= 800:
-        while currY <= 800:
+        while currY <= 900:
             if flag == 0: #0 = white spaces
                 space = pygame.Rect(currX, currY, BOARD_SPACE_WIDTH, BOARD_SPACE_HEIGHT)
                 wSpaces.append(space)
@@ -30,7 +30,7 @@ def draw_board():
                 flag = 0
             currY += 100
         currX += 100
-        currY = 0
+        currY = 100
     whiteSpaces = wSpaces
     blackSpaces = bSpaces
     return (wSpaces, bSpaces)
@@ -43,9 +43,9 @@ def init_board():
     global blackPieces
     #Black Pawn Locations
     currSpaceX = 0
-    currSpaceY = 100
+    currSpaceY = 200
     currX = 25
-    currY = 125
+    currY = 225
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
         newPiece = Piece("Pawn", "b", B_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 1)
@@ -65,7 +65,7 @@ def init_board():
     rightBishop = pygame.Rect(B_RIGHT_BISHOP_X, B_RIGHT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
     
     currSpaceX = 0
-    currSpaceY = 0
+    currSpaceY = 100
 
     bPieces.append(Piece("Rook","b", B_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 5))
     bPieces.append(Piece("Knight","b", B_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100, 3))
@@ -81,9 +81,9 @@ def init_board():
 
     #White Pawn Locations
     currSpaceX = 0
-    currSpaceY = 600
+    currSpaceY = 700
     currX = 25
-    currY = 625
+    currY = 725
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
         newPiece = Piece("Pawn", "w", W_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 1)
@@ -102,7 +102,7 @@ def init_board():
     rightBishop = pygame.Rect(W_RIGHT_BISHOP_X, W_RIGHT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
     
     currSpaceX = 0
-    currSpaceY = 700
+    currSpaceY = 800
     wPieces.append(Piece("Rook", "w", W_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 5))
     wPieces.append(Piece("Knight","w", W_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100, 3))
     wPieces.append(Piece("Bishop","w", W_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100, 3))

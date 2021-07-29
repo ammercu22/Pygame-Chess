@@ -63,49 +63,47 @@ class Piece:
             if self.name == "Pawn":
                 if self.pawnMoved == 0:
                     if self.color == "b":
-                        for piece in opponent.get_pieces():
-                            if piece.rect.x == self.rect.x and (piece.rect.y == self.rect.y + 100 or piece.rect.y == self.rect.y + 200):
-                                return True
                         if (pieceCurrXPos - space.x == 100 or pieceCurrXPos - space.x == -100) and pieceCurrYPos - space.y == -100:
                             for piece in opponent.get_pieces():
                                 if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
                                     return False
                         if (pieceCurrYPos - space.y == -100 or pieceCurrYPos - space.y == -200) and pieceCurrXPos == space.x:
+                            for piece in opponent.get_pieces():
+                                if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
+                                    return True
                             self.pawnMoved = 1
                             return False
                     else:
-                        for piece in opponent.get_pieces():
-                            if piece.rect.x == self.rect.x and (piece.rect.y == self.rect.y - 100 or piece.rect.y == self.rect.y - 200):
-                                return True
                         if (pieceCurrXPos - space.x == 100 or pieceCurrXPos - space.x == -100) and pieceCurrYPos - space.y == 100:
                             for piece in opponent.get_pieces():
                                 if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
                                     return False
                         if (pieceCurrYPos - space.y == 100 or pieceCurrYPos - space.y == 200) and pieceCurrXPos == space.x:
+                            for piece in opponent.get_pieces():
+                                if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
+                                    return True
                             self.pawnMoved = 1
                             return False
                 else:
                     if self.color == "b":
-                        for piece in opponent.get_pieces():
-                            if piece.rect.x == self.rect.x and piece.rect.y == self.rect.y + 100:
-                                return True
                         if (pieceCurrXPos - space.x == 100 or pieceCurrXPos - space.x == -100) and pieceCurrYPos - space.y == -100:
-                            print (space.x + 25, space.y + 25)
                             for piece in opponent.get_pieces():
                                 if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
                                     return False
                         if pieceCurrYPos - space.y == -100 and pieceCurrXPos == space.x:
+                            for piece in opponent.get_pieces():
+                                if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
+                                    return True
                             return False
                     else:
-                        for piece in opponent.get_pieces():
-                            if piece.rect.x == self.rect.x and piece.rect.y == self.rect.y - 100:
-                                return True
                         if (pieceCurrXPos - space.x == 100 or pieceCurrXPos - space.x == -100) and pieceCurrYPos - space.y == 100:
                             for piece in opponent.get_pieces():
-                                print (piece.rect.x, piece.rect.y)
                                 if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
                                     return False
                         if pieceCurrYPos - space.y == 100 and pieceCurrXPos == space.x:
+                            for piece in opponent.get_pieces():
+                                if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:
+                                    return True
                             return False
             if self.name == "Queen":
                 if abs(pieceCurrXPos - space.x) / 100 == abs(pieceCurrYPos - space.y) / 100:
