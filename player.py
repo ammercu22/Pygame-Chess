@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, piecesColor, time):
+    def __init__(self, piecesColor):
         self.pieces = []
         self.opponentPieces = []
         self.piecesColor = piecesColor

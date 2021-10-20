@@ -13,6 +13,7 @@ class Piece:
         self.pointVal = pointVal
 
 
+    #A function that updates the piece's position if the move is valid
     def move(self, mousePos, wSpaces, bSpaces, player, opponent):
         for space in bSpaces:
             if mousePos[0] > space.x and mousePos[0] < space.x + 100 and mousePos[1] > space.y and mousePos[1] < space.y + 100:
@@ -38,6 +39,7 @@ class Piece:
                     return False
         return True
 
+    #A function that checks to see if the selected pieces is being moved according to how their are allowed to move based on the rules of the game.
     def check_restriction(self, space, player, opponent):
         pieceCurrXPos = self.rect.x - 25
         pieceCurrYPos = self.rect.y - 25
@@ -119,6 +121,8 @@ class Piece:
                     return False
         return True
     
+    #checks to see if the pieces is attacking the opponent's pieces. If they are, take_piece() will remove the taken piece of the oppenent's list of pieces and add it to the current's player
+    #taken pieces list
     def check_attack(self, space, player, opponent):
         for piece in opponent.get_pieces():
             if piece.rect.x == space.x + 25 and piece.rect.y == space.y + 25:

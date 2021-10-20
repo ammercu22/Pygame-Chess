@@ -9,17 +9,20 @@ whiteSpaces = []
 blackSpaces = []
 
 flag = 0
+#a function that returns two lists of all "space" objects on the board. 
 def draw_board():
     currX = 0
-    currY = 100
+    currY = 0
     flag = 0
     wSpaces = []
     bSpaces = []
     global whiteSpaces
     global blackSpaces
 
+    #a nested while loop that calculates the x and y positions of each space, creates new "space" objects once the (x,y) coordinates are calculated, and appends each object to either
+    #the 'wSpaces' list or 'bSpaces' list
     while currX <= 800:
-        while currY <= 900:
+        while currY <= 800:
             if flag == 0: #0 = white spaces
                 space = pygame.Rect(currX, currY, BOARD_SPACE_WIDTH, BOARD_SPACE_HEIGHT)
                 wSpaces.append(space)
@@ -30,11 +33,12 @@ def draw_board():
                 flag = 0
             currY += 100
         currX += 100
-        currY = 100
+        currY = 0
     whiteSpaces = wSpaces
     blackSpaces = bSpaces
     return (wSpaces, bSpaces)
 
+#a function that returns 2 lists of all "pieces" objects that will be on the board.
 def init_board():
     numPawns = 0
     bPieces = []
@@ -43,9 +47,10 @@ def init_board():
     global blackPieces
     #Black Pawn Locations
     currSpaceX = 0
-    currSpaceY = 200
+    currSpaceY = 100
     currX = 25
-    currY = 225
+    currY = 125
+    #a while loop that calculates the (x,y) coordinates of all black pawns on the board, creates a pawn object once the coordinates are calculated, and adds the new pawn to the "bPieces" list
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
         newPiece = Piece("Pawn", "b", B_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 1)
@@ -54,7 +59,6 @@ def init_board():
         currX += 100
         currSpaceX += 100
 
-    #Rest of black pieces
     leftRook = pygame.Rect(B_LEFT_ROOK_X, B_LEFT_ROOK_Y, PIECE_WIDTH, PIECE_HEIGHT)
     leftKnight = pygame.Rect(B_LEFT_KNIGHT_X, B_LEFT_KNIGHT_Y, PIECE_WIDTH, PIECE_HEIGHT)
     leftBishop = pygame.Rect(B_LEFT_BISHOP_X, B_LEFT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
@@ -65,8 +69,9 @@ def init_board():
     rightBishop = pygame.Rect(B_RIGHT_BISHOP_X, B_RIGHT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
     
     currSpaceX = 0
-    currSpaceY = 100
+    currSpaceY = 0
 
+    #Appends all other created pieces other than pawns to the "bPieces" list with their specific coordinates
     bPieces.append(Piece("Rook","b", B_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 5))
     bPieces.append(Piece("Knight","b", B_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100, 3))
     bPieces.append(Piece("Bishop","b", B_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100, 3))
@@ -81,9 +86,10 @@ def init_board():
 
     #White Pawn Locations
     currSpaceX = 0
-    currSpaceY = 700
+    currSpaceY = 600
     currX = 25
-    currY = 725
+    currY = 625
+    #a while loop that calculates the (x,y) coordinates of all white pawns on the board, creates a pawn object once the coordinates are calculated, and adds the new pawn to the "wPieces" list
     while numPawns < 8:
         pawn = pygame.Rect(currX, currY, PIECE_WIDTH, PIECE_HEIGHT)
         newPiece = Piece("Pawn", "w", W_PAWN, pawn, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 1)
@@ -102,7 +108,8 @@ def init_board():
     rightBishop = pygame.Rect(W_RIGHT_BISHOP_X, W_RIGHT_BISHOP_Y, PIECE_WIDTH, PIECE_HEIGHT)
     
     currSpaceX = 0
-    currSpaceY = 800
+    currSpaceY = 700
+    #Appends all other created pieces other than pawns to the "wPieces" list with their specific coordinates
     wPieces.append(Piece("Rook", "w", W_ROOK, leftRook, currSpaceX, currSpaceX + 100, currSpaceY, currSpaceY + 100, 5))
     wPieces.append(Piece("Knight","w", W_KNIGHT, leftKnight, currSpaceX + 100, currSpaceX + 200, currSpaceY, currSpaceY + 100, 3))
     wPieces.append(Piece("Bishop","w", W_BISHOP, leftBishop, currSpaceX + 200, currSpaceX + 300, currSpaceY, currSpaceY + 100, 3))
@@ -123,7 +130,7 @@ def get_pieces():
     wPieces, bPieces = whitePieces, blackPieces
     return (wPieces, bPieces)
 
-#checks to see if a piece exist where the player clicked on. If so, change piece pos or do nothing
+#checks to see if a piece exist where the player clicked on. If so, change piece position or do nothing
 def check_space(mousePos): 
     global blackPieces
     global whitePieces
@@ -138,6 +145,7 @@ def check_space(mousePos):
             break
     return selectedPiece
 
+#return true or false based on if the player's move was valid or not
 def move_piece(mousePos, piece, playerPieces, opponentPieces):
     global blackSpaces
     global whiteSpaces
